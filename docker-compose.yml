@@ -1,0 +1,60 @@
+version: '3'
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins-ansible
+    build:
+      context: jenkins-ansible
+    ports:
+      - "8080:8080"
+      - "42975:42975"
+      - "41457:41457"
+    volumes:
+      - "$PWD/jenkins_home:/var/jenkins_home"
+    networks:
+      - net
+  tomcat:
+    container_name: tomcatz
+    image: tomcat:8.5.61
+    ports:
+      - "8888:8080"
+    networks:
+      - net
+  remote_host:
+    container_name: remote-host
+    image: remote-host
+    build:
+      context: centos7
+    volumes:
+      - "$PWD/aws-s3:/home/remote_user"
+    networks:
+      - net
+  remote_host2:
+    container_name: remote-host-ubu
+    image: remote-host-ubu
+    build:
+      context: ubuntu
+    volumes:
+      - "$PWD/ubuntu_mount:/home/remote_user"
+    networks:
+      - net
+  remote_host3:
+    container_name: ubuntu2
+    image: ubuntu2
+    build:
+      context: ubuntu2
+    networks:
+      - net
+  db_host:
+    container_name: db
+    image: mysql:5.7
+    environment:
+      - "MYSQL_ROOT_PASSWORD=1234"
+    volumes:
+      - "$PWD/db_data:/var/lib/mysql"
+    networks:
+      - net
+
+networks:
+  net:
+       

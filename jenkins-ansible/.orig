@@ -1,0 +1,9 @@
+FROM jenkins/jenkins
+
+USER root
+
+RUN apt update -y && apt install software-properties-common && add-apt-repository ppa:deadsnakes/ppa && apt update -y && apt install python3.8 && \
+    pip3 install ansible --upgrade
+
+USER jenkins
+

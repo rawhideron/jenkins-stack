@@ -1,0 +1,6 @@
+ubuntu_mount
+tomcat_home
+jenkins_home
+docker-compose.yml.bak
+db_data
+aws-s3

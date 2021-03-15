@@ -1,0 +1,24 @@
+FROM tomcat
+
+USER root
+
+
+# RUN useradd -ms /bin/bash jenkins && \
+#    echo "1234" | passwd jenkins  && \
+#     mkdir /home/jenkins/.ssh && \
+#     chmod 700 /home/jenkins/.ssh
+
+# COPY jenkins.pub /home/jenkins/.ssh/authorized_keys
+
+RUN chown jenkins:jenkins   -R /home/jenkins && \
+    chmod 400 /home/jenkins/.ssh/authorized_keys
+
+RUN ssh-keygen -A
+
+CMD /usr/sbin/sshd -D
+
+WORKDIR ${CATALINA_HOME}
+CMD ["catalina.sh"]
+
+USER jenkins
+

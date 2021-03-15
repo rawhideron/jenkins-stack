@@ -1,0 +1,13 @@
+FROM tomcat
+
+USER root
+
+
+# RUN mkdir /home/jenkins
+# RUN mkdir /home/jenkins/.ssh
+
+
+WORKDIR ${CATALINA_HOME}
+CMD ["catalina.sh"]
+
+CMD /usr/sbin/sshd -D
