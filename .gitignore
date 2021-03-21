@@ -3,4 +3,6 @@ tomcat_home
 jenkins_home
 docker-compose.yml.bak
 db_data
+remote-key
+remote-key.pub
 aws-s3
